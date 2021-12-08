@@ -6,7 +6,7 @@ from typing import Optional, List
 
 
 class EmailClient:
-    Header = namedtuple("Header", ["From", "To", "Subject"])
+    Header = namedtuple("Header", ["From", "To", "Subject", "Date"])
     Body = namedtuple("Body", ["Text", "Pdf"])
     Pdf = namedtuple("Pdf", ["FileName", "Data"])
     text = None
@@ -37,7 +37,6 @@ class EmailClient:
 
     @staticmethod
     def get_header(msg_: email.message.Message) -> Header:
-        print(msg_.get("Date", ""))
         head = EmailClient.Header(*[msg_.get(i, '') for i in EmailClient.Header._fields])
         return head
 
@@ -56,7 +55,6 @@ class EmailClient:
 
     def parse_content(self, msg_: email.message.Message) -> None:
         content_type = msg_.get_content_type()
-        print(content_type)
         if content_type == "text/plain":
             content = msg_.get_payload(decode=True)
             charset = msg_.get_charset()
@@ -65,7 +63,6 @@ class EmailClient:
                 result = re.search(r'charset="([A-Z0-9-]*?)"', content_type)
                 if result:
                     charset = result.group(1)
-                    print(charset)
             content = content.decode(charset)
             self.text = content
 
@@ -81,3 +78,5 @@ class EmailClient:
         self.parse_body(msg_)
         return EmailClient.Body(Text=self.text, Pdf=self.pdf_file)
 
+    def close(self):
+        self.gmail.close()
