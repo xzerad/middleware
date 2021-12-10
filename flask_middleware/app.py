@@ -4,9 +4,9 @@ app = Flask(__name__)
 
 
 @app.route('/<name>')
-def hello_world(name):
+def get_file(name):
     # todo change path
-    return send_from_directory(r"C:\Users\Radwan\Desktop", name)
+    return send_from_directory(r"C:\Users\sonia bahri\Desktop\cv_dir", f"{name}.pdf")
 
 
 if __name__ == '__main__':

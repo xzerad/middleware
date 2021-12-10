@@ -12,18 +12,18 @@ public class SendMail {
     public SendMail(String m, String v) {
          msg=m;
          valeur=v;
-
-         e = Dotenv.configure().directory("/home/alaeddine/IdeaProjects/midd/assets").filename(".env").load();
+         e = Dotenv.configure().directory("C:\\Users\\sonia bahri\\Desktop\\mid\\middleware\\email_reader\\.env").filename(".env").load();
     }
 
     public  void send() throws EmailException {
-
         Email email = new SimpleEmail();
-        email.setHostName("smtp.googlemail.com");
+        email.setDebug(true);
+        email.setHostName("smtp.gmail.com");
         email.setSmtpPort(465);
-        email.setAuthenticator(new DefaultAuthenticator(e.get("email"),e.get("password")));
+        System.out.println(e.get("MAIL"));
+        email.setAuthenticator(new DefaultAuthenticator(e.get("MAIL"),e.get("PASS")));
         email.setSSLOnConnect(true);
-        email.setFrom("alaeddinehmidazbot@gmail.com");
+        email.setFrom(e.get("MAIL"));
         email.setSubject("resultat");
         email.setMsg(msg);
         email.addTo(valeur);

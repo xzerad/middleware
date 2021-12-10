@@ -18,12 +18,12 @@ public class Mongo {
 
 
     Mongo(){
-        String uri="";
+        String uri="mongodb://localhost:27017";
         MongoClientURI clientURI = new MongoClientURI(uri);
         MongoClient mongoClient = new MongoClient(clientURI);
 
-        MongoDatabase mongoDatabase = mongoClient.getDatabase("ggg");
-        collection= mongoDatabase.getCollection("test");
+        MongoDatabase mongoDatabase = mongoClient.getDatabase("MiddleWare");
+        collection= mongoDatabase.getCollection("email_data");
     }
 
 
