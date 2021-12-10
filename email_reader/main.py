@@ -111,4 +111,3 @@ with Flow("ETL email pipeline", schedule) as flow:
 
 flow.executor = LocalDaskExecutor()
 flow.run()
-# flow.visualize()

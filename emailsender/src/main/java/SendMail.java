@@ -12,7 +12,7 @@ public class SendMail {
     public SendMail(String m, String v) {
          msg=m;
          valeur=v;
-         e = Dotenv.configure().directory("C:\\Users\\sonia bahri\\Desktop\\mid\\middleware\\email_reader\\.env").filename(".env").load();
+         e = Dotenv.configure().directory("C:\\Users\\Radwan\\Desktop\\cv_reader\\middleware\\email_reader\\.env").filename(".env").load();
     }
 
     public  void send() throws EmailException {
